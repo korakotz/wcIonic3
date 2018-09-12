@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>user-account</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<h2 *ngIf="!loggedIn">You are not login</h2>
+<button ion-button block *ngIf="!loggedIn" (click)="openLoginPage()">Click here to Login</button>
+
+<ion-list *ngIf="loggedIn">
+  <h1>Hello : {{ userInfo.displayname }}</h1>
+  <button ion-button (click)="logOut()">Logout</button>
+</ion-list>
+</ion-content>

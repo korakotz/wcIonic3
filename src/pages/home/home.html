@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)="openLoginPage()">
+            Login
+          </button>
+      <button ion-button outline color="primary" (click)="openSignupPage()">
+        Register
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchQuery" (search)="onSearch($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-card>
+    <ion-slides autoplay="3000" pager>
+      <ion-slide>
+        <img src="http://placehold.it/350x200" alt="">
+      </ion-slide>
+      <ion-slide>
+        <img src="http://placehold.it/350x200" alt="">
+      </ion-slide>
+      <ion-slide>
+        <img src="http://placehold.it/350x200" alt="">
+      </ion-slide>
+    </ion-slides>
+  </ion-card>
+  <!-- <h1 padding>Recent Products</h1>
+<ion-grid>
+  <ion-row>
+    <ion-card>
+      <ion-slides #productSlides>
+        <ion-slide *ngFor="let product of products">
+            <img [src]="product.featured_src">
+            <h1 padding> {{ product.title }}</h1>
+            <p padding [innerHTML]="product.short_description"></p>
+        </ion-slide>
+      </ion-slides>
+    </ion-card>
+  </ion-row>
+</ion-grid> -->
+<h1 padding>Recent Products List</h1>
+<ion-list>
+  <ion-item *ngFor="let product of products" text-wrap (click)="openProductPage(product)">
+    <ion-thumbnail item-left *ngFor="let image of product.images | slice:0:1">
+      <img [src]="image.src">
+    </ion-thumbnail>
+    <h2>{{ product.name }}</h2>
+    <p>
+      <span [innerHTML]="product.short_description.substr(0, 50) + '...'"></span>
+      <span [innerHTML]="product.price_html"></span>
+    </p>
+
+    <button ion-button icon clear item-right>
+      <ion-icon name="arrow-forward"></ion-icon>
+    </button>
+  </ion-item>
+  <!-- <ion-item *ngFor="let moreProduct of moreProducts" text-wrap (click)="openProductPage(moreProduct)">
+    <ion-thumbnail item-left *ngFor="let image of moreProduct.images | slice:0:1">
+      <img [src]="image.src">
+    </ion-thumbnail>
+    <h2>{{ moreProduct.name }}</h2>
+    <p>
+      <span [innerHTML]="moreProduct.short_description.substr(0, 50) + '...'"></span>
+      <span [innerHTML]="moreProduct.price_html"></span>
+    </p>
+
+    <button ion-button icon clear item-right>
+      <ion-icon name="arrow-forward"></ion-icon>
+    </button>
+  </ion-item> -->
+</ion-list>
+
+<ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)">
+  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>
+</ion-content>
